@@ -2,9 +2,9 @@ package com.example.demo.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Editor extends User{
@@ -12,9 +12,8 @@ public class Editor extends User{
 	private String editorKey;
 	private String salary;
 	
-	@ManyToMany
-	@JoinTable(name="EDITOR2SUMMARIES")
-	private List<NewsSummary> summaries;
+	@OneToMany(mappedBy="editor", cascade=CascadeType.ALL)
+	private List<News> news;
 
 	public String getEditorKey() {
 		return editorKey;
@@ -32,15 +31,14 @@ public class Editor extends User{
 		this.salary = salary;
 	}
 
-	public List<NewsSummary> getSummaries() {
-		return summaries;
+	public List<News> getNews() {
+		return news;
 	}
 
-	public void setSummaries(List<NewsSummary> summaries) {
-		this.summaries = summaries;
+	public void setNews(List<News> news) {
+		this.news = news;
 	}
-	
-	
+		
 
 }
 

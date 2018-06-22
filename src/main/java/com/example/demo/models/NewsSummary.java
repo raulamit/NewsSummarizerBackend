@@ -18,12 +18,8 @@ public class NewsSummary extends Summary{
 	private Category category;
     private String views;
     
-    @ManyToOne
-    @JsonIgnore
-    private News news;
-    
     @ManyToMany(mappedBy="summaries", cascade=CascadeType.ALL)
-	private List<Editor> editors;
+	private List<News> news;
 
 	public Category getCategory() {
 		return category;
@@ -41,20 +37,12 @@ public class NewsSummary extends Summary{
 		this.views = views;
 	}
 
-	public News getNews() {
+	public List<News> getEditors() {
 		return news;
 	}
 
-	public void setNews(News news) {
+	public void setEditors(List<News> news) {
 		this.news = news;
-	}
-
-	public List<Editor> getEditors() {
-		return editors;
-	}
-
-	public void setEditors(List<Editor> editors) {
-		this.editors = editors;
 	} 
     
     
