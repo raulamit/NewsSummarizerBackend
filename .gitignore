@@ -23,3 +23,11 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+### maven files###
+mvnw
+mvnw.cmd
+.mvn
+
+### Log files ###
+*.log
