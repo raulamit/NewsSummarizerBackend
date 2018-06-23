@@ -4,13 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
+@Inheritance
 public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int Id;
+	private int id;
 	private String username;
 	private String password;
 	private String firstName;
@@ -19,10 +22,10 @@ public class User {
 	private String phone;
 	private String email;
 	public int getId() {
-		return Id;
+		return id;
 	}
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 	public String getUsername() {
 		return username;

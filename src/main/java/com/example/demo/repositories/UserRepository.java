@@ -9,12 +9,12 @@ import com.example.demo.models.User;
 
 public interface UserRepository extends CrudRepository<User, Integer>{
 	
-	@Query("SELECT u FROM User u WHERE u.userName=:username AND u.password=:password")
-	Iterable<User> findUserByCredentials(
+	@Query("SELECT u FROM User u WHERE u.username=:username AND u.password=:password")
+	User findUserByCredentials(
 			@Param("username") String username, 
 			@Param("password") String password);
 	
-	@Query("SELECT u FROM User u WHERE u.userName=:username")
-	Iterable<User> findUserByUsername(@Param("username") String u);
+	@Query("SELECT u FROM User u WHERE u.username=:username")
+	User findUserByUsername(@Param("username") String u);
 
 }
