@@ -58,8 +58,13 @@ public class SummaryService {
 	@DeleteMapping("/api/summary/{summaryId}")
 	public void deleteSummary(@PathVariable("summaryId") int summaryId) {
 		summaryRepository.deleteById(summaryId);
-		
-	}	
+	}
+
+	@GetMapping("/api/summary/batch/{batchNum}")
+	public Iterable<Summary> getSummaryByBatch(@PathVariable("batchNum") int batchNum) {
+		// todo: implement some sort of batching and logic for appending advertisements
+		return summaryRepository.findAll();
+	}
 
 
 }

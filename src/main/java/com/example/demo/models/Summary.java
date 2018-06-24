@@ -12,61 +12,66 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Summary {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	private String title;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String title;
     private String description;
     private String stype;
-    
-	@OneToMany(mappedBy="summary" , cascade=CascadeType.ALL)
-	private List<Review> reviews;
+    private String imgSrc;
 
-	public int getId() {
-		return id;
-	}
+    @OneToMany(mappedBy = "summary", cascade = CascadeType.ALL)
+    private List<Review> reviews;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public String getStype() {
-		return stype;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setStype(String stype) {
-		this.stype = stype;
-	}
+    public String getStype() {
+        return stype;
+    }
 
-	public List<Review> getReviews() {
-		return reviews;
-	}
+    public void setStype(String stype) {
+        this.stype = stype;
+    }
 
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
-	}
+    public List<Review> getReviews() {
+        return reviews;
+    }
 
-    
-	
-    
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public String getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
 }
 
