@@ -23,7 +23,7 @@ import com.example.demo.repositories.ReaderRepository;
 import com.example.demo.repositories.UserRepository;
 
 @RestController
-@CrossOrigin (origins = "*", maxAge = 3600)
+@CrossOrigin (origins = "http://localhost:4200", maxAge = 3600, allowCredentials= "true")
 public class UserService {
 	
 	@Autowired
