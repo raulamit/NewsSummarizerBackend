@@ -16,7 +16,7 @@ import com.example.demo.models.Summary;
 import com.example.demo.repositories.SummaryRepository;
 
 @RestController
-@CrossOrigin (origins = "*", maxAge = 3600)
+@CrossOrigin (origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 public class SummaryService {
 	
 	@Autowired
@@ -65,6 +65,4 @@ public class SummaryService {
 		// todo: implement some sort of batching and logic for appending advertisements
 		return summaryRepository.findAll();
 	}
-
-
 }

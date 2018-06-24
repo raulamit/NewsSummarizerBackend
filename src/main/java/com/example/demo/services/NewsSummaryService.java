@@ -16,7 +16,7 @@ import com.example.demo.models.NewsSummary;
 import com.example.demo.repositories.NewsSummaryRepository;
 
 @RestController
-@CrossOrigin (origins = "*", maxAge = 3600)
+@CrossOrigin (origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 public class NewsSummaryService {
 	
 	@Autowired

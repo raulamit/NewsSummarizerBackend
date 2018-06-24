@@ -15,11 +15,12 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class News {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	private String apiUrl;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String sourceId;
+    private String apiUrl;
     private String type;
     private String category;
     private String sectionName;
@@ -27,105 +28,108 @@ public class News {
     private String webUrl;
     private String pillarName;
     private Date webPublicationDate;
-    
+
     @ManyToOne
     private Editor editor;
-    
+
     @ManyToMany
-    @JoinTable(name="News2Summary")
+    @JoinTable(name = "News2Summary")
     private List<NewsSummary> summaries;
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getApiUrl() {
-		return apiUrl;
-	}
+    public String getApiUrl() {
+        return apiUrl;
+    }
 
-	public void setApiUrl(String apiUrl) {
-		this.apiUrl = apiUrl;
-	}
+    public void setApiUrl(String apiUrl) {
+        this.apiUrl = apiUrl;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getCategory() {
-		return category;
-	}
+    public String getCategory() {
+        return category;
+    }
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
-	public String getSectionName() {
-		return sectionName;
-	}
+    public String getSectionName() {
+        return sectionName;
+    }
 
-	public void setSectionName(String sectionName) {
-		this.sectionName = sectionName;
-	}
+    public void setSectionName(String sectionName) {
+        this.sectionName = sectionName;
+    }
 
-	public String getWebTitle() {
-		return webTitle;
-	}
+    public String getWebTitle() {
+        return webTitle;
+    }
 
-	public void setWebTitle(String webTitle) {
-		this.webTitle = webTitle;
-	}
+    public void setWebTitle(String webTitle) {
+        this.webTitle = webTitle;
+    }
 
-	public String getWebUrl() {
-		return webUrl;
-	}
+    public String getWebUrl() {
+        return webUrl;
+    }
 
-	public void setWebUrl(String webUrl) {
-		this.webUrl = webUrl;
-	}
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
+    }
 
-	public String getPillarName() {
-		return pillarName;
-	}
+    public String getPillarName() {
+        return pillarName;
+    }
 
-	public void setPillarName(String pillarName) {
-		this.pillarName = pillarName;
-	}
+    public void setPillarName(String pillarName) {
+        this.pillarName = pillarName;
+    }
 
-	public Date getWebPublicationDate() {
-		return webPublicationDate;
-	}
+    public Date getWebPublicationDate() {
+        return webPublicationDate;
+    }
 
-	public void setWebPublicationDate(Date webPublicationDate) {
-		this.webPublicationDate = webPublicationDate;
-	}
+    public void setWebPublicationDate(Date webPublicationDate) {
+        this.webPublicationDate = webPublicationDate;
+    }
 
-	public Editor getEditor() {
-		return editor;
-	}
+    public Editor getEditor() {
+        return editor;
+    }
 
-	public void setEditor(Editor editor) {
-		this.editor = editor;
-	}
+    public void setEditor(Editor editor) {
+        this.editor = editor;
+    }
 
-	public List<NewsSummary> getSummaries() {
-		return summaries;
-	}
+    public List<NewsSummary> getSummaries() {
+        return summaries;
+    }
 
-	public void setSummaries(List<NewsSummary> summaries) {
-		this.summaries = summaries;
-	}
+    public void setSummaries(List<NewsSummary> summaries) {
+        this.summaries = summaries;
+    }
 
-	
-    
-    
-   
+    public String getSourceId() {
+        return sourceId;
+    }
+
+    public void setSourceId(String sourceId) {
+        this.sourceId = sourceId;
+    }
 }
 
