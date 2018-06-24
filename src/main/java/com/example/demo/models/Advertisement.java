@@ -6,27 +6,32 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Advertisement extends Summary{
-	
-	private String src;
-	
-	@ManyToOne
-	@JsonIgnore
+public class Advertisement extends Summary {
+
+    private String src;
+
+    @ManyToOne
+    @JsonIgnore
     private Advertiser advertiser;
 
-	public String getSrc() {
-		return src;
-	}
+    public Advertisement() {
+        super();
+        this.setStype("ad");
+    }
 
-	public void setSrc(String src) {
-		this.src = src;
-	}
+    public String getSrc() {
+        return src;
+    }
 
-	public Advertiser getAdvertiser() {
-		return advertiser;
-	}
+    public void setSrc(String src) {
+        this.src = src;
+    }
 
-	public void setAdvertiser(Advertiser advertiser) {
-		this.advertiser = advertiser;
-	}
+    public Advertiser getAdvertiser() {
+        return advertiser;
+    }
+
+    public void setAdvertiser(Advertiser advertiser) {
+        this.advertiser = advertiser;
+    }
 }

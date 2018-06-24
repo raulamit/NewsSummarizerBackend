@@ -21,6 +21,11 @@ public class NewsSummary extends Summary{
     @ManyToMany(mappedBy="summaries", cascade=CascadeType.ALL)
 	private List<News> news;
 
+    public NewsSummary() {
+    	super();
+    	this.setStype("news");
+	}
+
 	public Category getCategory() {
 		return category;
 	}
