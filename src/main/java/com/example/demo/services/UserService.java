@@ -58,7 +58,7 @@ public class UserService {
 			return (List<User>) userRepository.findUserByCredentials(username, password);
 		}
 		else if(username != null) {
-			return (List<User>) userRepository.findUserByUsername(username);
+			return (List<User>) userRepository.findUsersByUsername(username + "%");
 		}
 		return (List<User>) userRepository.findAll();
 	}
@@ -101,13 +101,16 @@ public class UserService {
 	@PostMapping("/api/register")
 	public User register(@RequestBody User user,
 			HttpSession session) {
+		User nullUser = new User();
+		nullUser.setUsername("NULL");
+		
 		User existingUser = (User) userRepository.findUserByUsername(user.getUsername());
 		if(existingUser == null) {
 				User newUser = userRepository.save(user);
 				session.setAttribute("currentUser", newUser);
 				return newUser;
 		}
-		return null;
+		return nullUser;
 	}
 	
 	@GetMapping("/api/profile")
