@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.models.Advertisement;
+import com.example.demo.models.NewsSummary;
 import com.example.demo.models.Summary;
+import com.example.demo.models.User;
+import com.example.demo.repositories.AdvertisementRepository;
+import com.example.demo.repositories.NewsSummaryRepository;
 import com.example.demo.repositories.SummaryRepository;
 
 @RestController
@@ -21,6 +29,12 @@ public class SummaryService {
 	
 	@Autowired
 	SummaryRepository summaryRepository;
+	
+	@Autowired
+	NewsSummaryRepository newsSummaryRepo;
+	
+	@Autowired
+	AdvertisementRepository advertisementRepository;
 	
 	//CREATE NEW Summary
 	@PostMapping("/api/summary")
@@ -60,9 +74,33 @@ public class SummaryService {
 		summaryRepository.deleteById(summaryId);
 	}
 
+//	@GetMapping("/api/summary/batch/{batchNum}")
+//	public Iterable<Summary> getSummaryByBatch(@PathVariable("batchNum") int batchNum) {
+//		
+//		// todo: implement some sort of batching and logic for appending advertisements
+//		return summaryRepository.findAll();
+//	}
+	
 	@GetMapping("/api/summary/batch/{batchNum}")
-	public Iterable<Summary> getSummaryByBatch(@PathVariable("batchNum") int batchNum) {
-		// todo: implement some sort of batching and logic for appending advertisements
-		return summaryRepository.findAll();
+	public Iterable<Summary> getSummaryByBatch(
+			@RequestParam(name="category", required=false)
+				String category) {
+		List<Summary> summaries = new ArrayList<>();
+		List<NewsSummary> newsSummaries = new ArrayList<NewsSummary>();
+		if(category != null) {
+			newsSummaries = (List<NewsSummary>) newsSummaryRepo.findSummaryByCategory(category);
+		}
+		else {
+			newsSummaries = (List<NewsSummary>) newsSummaryRepo.findAll();
+		}
+		List<Advertisement> advertisements = new ArrayList<Advertisement>();
+		advertisements = (List<Advertisement>) advertisementRepository.findAll();
+		int x = newsSummaries.size() / 2;
+		for(NewsSummary n : newsSummaries)
+			summaries.add(n);
+		for(int i= 0; i < newsSummaries.size()/2; i++)
+			summaries.add(advertisements.get(i));
+		
+		return summaries;
 	}
 }

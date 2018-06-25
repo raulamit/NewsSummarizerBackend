@@ -9,8 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class NewsSummary extends Summary{
 	
-	@Enumerated(EnumType.STRING)
-	private Category category;
+	private String category;
     private String views;
     private String sourceId;
     @ManyToOne
@@ -22,11 +21,11 @@ public class NewsSummary extends Summary{
     	this.setStype("news");
 	}
 
-	public Category getCategory() {
+	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 
