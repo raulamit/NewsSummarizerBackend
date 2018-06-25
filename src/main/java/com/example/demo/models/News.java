@@ -32,8 +32,7 @@ public class News {
     @ManyToOne
     private Editor editor;
 
-    @ManyToMany
-    @JoinTable(name = "News2Summary")
+    @OneToMany(mappedBy = "news")
     private List<NewsSummary> summaries;
 
     public int getId() {

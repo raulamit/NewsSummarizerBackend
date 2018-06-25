@@ -2,12 +2,7 @@ package com.example.demo.models;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,9 +12,12 @@ public class NewsSummary extends Summary{
 	@Enumerated(EnumType.STRING)
 	private Category category;
     private String views;
+    @Transient
+    private String sourceId;
     
-    @ManyToMany(mappedBy="summaries", cascade=CascadeType.ALL)
-	private List<News> news;
+    @ManyToOne
+	@JsonIgnore
+	private News news;
 
     public NewsSummary() {
     	super();
@@ -42,17 +40,20 @@ public class NewsSummary extends Summary{
 		this.views = views;
 	}
 
-	public List<News> getEditors() {
+	public News getNews() {
 		return news;
 	}
 
-	public void setEditors(List<News> news) {
+	public void setNews(News news) {
 		this.news = news;
-	} 
-    
-    
-    
+	}
 
+	public String getSourceId() {
+		return sourceId;
+	}
 
+	public void setSourceId(String sourceId) {
+		this.sourceId = sourceId;
+	}
 }
 

@@ -1,7 +1,12 @@
 package com.example.demo.services;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.models.Editor;
+import com.example.demo.models.News;
+import com.example.demo.models.User;
+import com.example.demo.repositories.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,17 +20,35 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.models.NewsSummary;
 import com.example.demo.repositories.NewsSummaryRepository;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @CrossOrigin (origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 public class NewsSummaryService {
 	
 	@Autowired
 	NewsSummaryRepository newssummaryRepository;
+	@Autowired
+	NewsRepository newsRepository;
 	
 	//CREATE NEW NewsSummary
 	@PostMapping("/api/newssummary")
 	public NewsSummary createNewsSummary(
-			@RequestBody NewsSummary newssummary) {
+            @RequestBody NewsSummary newssummary,
+            HttpSession session) {
+        User user = (User) session.getAttribute("currentUser");
+	    News news = new News();
+	    String newsId = newssummary.getSourceId();
+	    news.setSourceId(newsId);
+
+	    news.setEditor((new Editor(user)));
+        List<News> newsResult = newsRepository.findNewsBySourceId(newsId);
+        if(!newsResult.isEmpty()) {
+            news = newsResult.get(0);
+        } else {
+            newsRepository.save(news);
+        }
+        newssummary.setNews(news);
 		return newssummaryRepository.save(newssummary);
 	}
 	

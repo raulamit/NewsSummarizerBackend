@@ -15,6 +15,20 @@ public class Editor extends User{
 	@OneToMany(mappedBy="editor", cascade=CascadeType.ALL)
 	private List<News> news;
 
+	public Editor() {
+	}
+	public Editor(User user) {
+		this.setId(user.getId());
+		this.setUsername(user.getUsername());
+		this.setPassword(user.getPassword());
+		this.setFirstName(user.getFirstName());
+		this.setLastName(user.getLastName());
+		this.setRole(user.getRole());
+		this.setPhone(user.getPhone());
+		this.setEmail(user.getEmail());
+	}
+
+
 	public String getEditorKey() {
 		return editorKey;
 	}
