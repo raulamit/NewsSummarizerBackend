@@ -1,8 +1,6 @@
 package com.example.demo.services;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -74,12 +72,6 @@ public class SummaryService {
         summaryRepository.deleteById(summaryId);
     }
 
-//	@GetMapping("/api/summary/batch/{batchNum}")
-//	public Iterable<Summary> getSummaryByBatch(@PathVariable("batchNum") int batchNum) {
-//		
-//		// todo: implement some sort of batching and logic for appending advertisements
-//		return summaryRepository.findAll();
-//	}
 
     @GetMapping("/api/summary/batch/{batchNum}")
     public Iterable<Summary> getSummaryByBatch(
@@ -97,9 +89,9 @@ public class SummaryService {
         int x = newsSummaries.size() / 2;
         for (NewsSummary n : newsSummaries)
             summaries.add(n);
+        Random random = new Random();
         for (int i = 0; i < newsSummaries.size() / 2; i++)
-            summaries.add(advertisements.get(i));
-
+            summaries.add(random.nextInt(summaries.size()),advertisements.get(i));
         return summaries;
     }
 }
