@@ -12,9 +12,7 @@ public class NewsSummary extends Summary{
 	@Enumerated(EnumType.STRING)
 	private Category category;
     private String views;
-    @Transient
     private String sourceId;
-    
     @ManyToOne
 	@JsonIgnore
 	private News news;
