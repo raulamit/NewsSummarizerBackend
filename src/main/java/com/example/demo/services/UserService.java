@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.demo.models.Advertiser;
+import com.example.demo.models.Editor;
+import com.example.demo.models.Reader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -104,10 +107,15 @@ public class UserService {
                          HttpSession session) {
         User nullUser = new User();
         nullUser.setUsername("NULL");
-
         User existingUser = (User) userRepository.findUserByUsername(user.getUsername());
         if (existingUser == null) {
-            User newUser = userRepository.save(user);
+            User newUser;
+            switch (user.getRole()) {
+                case "Advertiser" : newUser = advertiserRepository.save(new Advertiser(user)); break;
+                case "Editor": newUser =  editorRepository.save(new Editor(user)); break;
+                default: newUser = readerRepository.save(new Reader(user));
+            }
+//            User newUser = userRepository.save(user);
             session.setAttribute("currentUser", newUser);
             return newUser;
         }

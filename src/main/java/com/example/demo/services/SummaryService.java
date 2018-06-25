@@ -93,12 +93,12 @@ public class SummaryService {
             newsSummaries = (List<NewsSummary>) newsSummaryRepo.findAll();
         }
         List<Advertisement> advertisements = new ArrayList<Advertisement>();
-//        advertisements = (List<Advertisement>) advertisementRepository.findAll();
+        advertisements = (List<Advertisement>) advertisementRepository.findAll();
         int x = newsSummaries.size() / 2;
         for (NewsSummary n : newsSummaries)
             summaries.add(n);
-//        for (int i = 0; i < newsSummaries.size() / 2; i++)
-//            summaries.add(advertisements.get(i));
+        for (int i = 0; i < newsSummaries.size() / 2; i++)
+            summaries.add(advertisements.get(i));
 
         return summaries;
     }
