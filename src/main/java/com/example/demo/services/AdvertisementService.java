@@ -2,6 +2,8 @@ package com.example.demo.services;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,21 +15,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.models.Advertisement;
+import com.example.demo.models.Advertiser;
+import com.example.demo.models.User;
 import com.example.demo.repositories.AdvertisementRepository;
+import com.example.demo.repositories.AdvertiserRepository;
 
 @RestController
-@CrossOrigin (origins = "*", maxAge = 3600)
+@CrossOrigin (origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 public class AdvertisementService {
 	
 	@Autowired
 	AdvertisementRepository advertisementRepository;
 	
-	//CREATE NEW Advertisement
-	@PostMapping("/api/advertisement")
-	public Advertisement createAdvertisement(
-			@RequestBody Advertisement advertisement) {
-		return advertisementRepository.save(advertisement);
-	}
+	@Autowired
+	AdvertiserRepository advertiserRepository;
+	
+//	//CREATE NEW Advertisement
+//	@PostMapping("/api/advertisement")
+//	public Advertisement createAdvertisement(
+//			@RequestBody Advertisement advertisement) {
+//		return advertisementRepository.save(advertisement);
+//	}
+	
+	//CREATE NEW Advertisement For Advertiser
+		@PostMapping("/api/advertisement")
+		public Advertisement createAdvertisementForAdvertiser(
+				@RequestBody Advertisement advertisement,
+				HttpSession session) {
+			Advertiser advertiser = (Advertiser) session.getAttribute("currentUser");	
+			advertisement.setAdvertiser(advertiser);
+			return advertisementRepository.save(advertisement);
+		}
 	
 	//FIND Advertisement BY Advertisement ID
 	@GetMapping("/api/advertisement/{advertisementId}")
