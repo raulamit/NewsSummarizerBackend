@@ -21,7 +21,7 @@ import com.example.demo.repositories.AdvertisementRepository;
 import com.example.demo.repositories.AdvertiserRepository;
 
 @RestController
-@CrossOrigin (origins = "https://newssummarizer-webdev2018-ng.herokuapp.com/", maxAge = 3600, allowCredentials="true")
+@CrossOrigin (origins = "https://newssummarizer-webdev2018-ng.herokuapp.com", maxAge = 3600, allowCredentials="true")
 //@CrossOrigin (origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 public class AdvertisementService {
 	
