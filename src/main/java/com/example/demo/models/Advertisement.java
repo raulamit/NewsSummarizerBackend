@@ -8,7 +8,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Advertisement extends Summary {
 
-    private String src;
+    private String videoLink;
+    private String company;
+    private String website;
+    
 
     @ManyToOne
     @JsonIgnore
@@ -19,19 +22,37 @@ public class Advertisement extends Summary {
         this.setStype("ad");
     }
 
-    public String getSrc() {
-        return src;
-    }
+	public String getVideoLink() {
+		return videoLink;
+	}
 
-    public void setSrc(String src) {
-        this.src = src;
-    }
+	public void setVideoLink(String videoLink) {
+		this.videoLink = videoLink;
+	}
 
-    public Advertiser getAdvertiser() {
-        return advertiser;
-    }
+	public String getCompany() {
+		return company;
+	}
 
-    public void setAdvertiser(Advertiser advertiser) {
-        this.advertiser = advertiser;
-    }
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public Advertiser getAdvertiser() {
+		return advertiser;
+	}
+
+	public void setAdvertiser(Advertiser advertiser) {
+		this.advertiser = advertiser;
+	}
+
+    
 }
