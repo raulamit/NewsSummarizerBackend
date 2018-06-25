@@ -23,7 +23,7 @@ import com.example.demo.repositories.ReaderRepository;
 import com.example.demo.repositories.UserRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin (origins = "http://localhost:4200", maxAge = 3600, allowCredentials= "true")
 public class UserService {
 
     @Autowired
@@ -128,15 +128,18 @@ public class UserService {
     }
 
     @PostMapping("/api/login")
-    public User login(@RequestBody User credentials,
-                      HttpSession session) {
+    public User login(	@RequestBody User credentials,
+                          HttpSession session) {
+        User nullUser = new User();
+        nullUser.setUsername("NULL");
         User user = userRepository.findUserByCredentials(credentials.getUsername(),
                 credentials.getPassword());
-        if (user != null) {
+        if(user != null) {
             session.setAttribute("currentUser", user);
+            return user;
         }
-
-        return user;
+        else
+            return nullUser;
     }
 
 
