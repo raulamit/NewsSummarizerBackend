@@ -42,8 +42,8 @@ public class AdvertisementService {
 		public Advertisement createAdvertisementForAdvertiser(
 				@RequestBody Advertisement advertisement,
 				HttpSession session) {
-			Advertiser advertiser = (Advertiser) session.getAttribute("currentUser");	
-			advertisement.setAdvertiser(advertiser);
+			User advertiser =  (User) session.getAttribute("currentUser");
+			advertisement.setAdvertiser(new Advertiser(advertiser));
 			return advertisementRepository.save(advertisement);
 		}
 	
