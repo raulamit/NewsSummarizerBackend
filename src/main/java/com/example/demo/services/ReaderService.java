@@ -1,6 +1,10 @@
 package com.example.demo.services;
 
 import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,15 +16,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.models.Editor;
 import com.example.demo.models.Reader;
+import com.example.demo.repositories.EditorRepository;
 import com.example.demo.repositories.ReaderRepository;
 
 @RestController
-@CrossOrigin (origins = "*", maxAge = 3600)
+@CrossOrigin (origins = "http://localhost:4200", maxAge = 3600, allowCredentials= "true")
+//@CrossOrigin (origins = "https://newssummarizer-webdev2018-ng.herokuapp.com", maxAge = 3600, allowCredentials="true")
 public class ReaderService {
 	
 	@Autowired
 	ReaderRepository readRepository;
+	
+	@Autowired
+	EditorRepository editorRepository;
 	
 	//CREATE NEW Reader
 	@PostMapping("/api/reader")
@@ -39,6 +49,32 @@ public class ReaderService {
 			return data.get();
 			
 		return null;
+	}
+	
+	//Follow EDITOR
+	@PutMapping("/api/followeditor")
+	public Reader followEditor(@RequestBody Editor editor,
+			HttpSession session) {
+		
+		Reader reader = (Reader) session.getAttribute("currentUser");
+		List<Editor> followedEditors = reader.getEditorsFollowed();
+		followedEditors.add(editor);
+		reader.setEditorsFollowed(followedEditors);
+		readRepository.save(reader);
+		return readRepository.findById(reader.getId()).get();
+	}
+	
+	//unFollow EDITOR
+	@PutMapping("/api/unfolloweditor")
+	public Reader unfollowEditor(@RequestBody Editor editor,
+			HttpSession session) {
+		
+		Reader reader = (Reader) session.getAttribute("currentUser");
+		List<Editor> followedEditors = reader.getEditorsFollowed();
+		followedEditors.removeIf(e -> e.getId()==editor.getId());
+		reader.setEditorsFollowed(followedEditors);
+		readRepository.save(reader);
+		return readRepository.findById(reader.getId()).get();
 	}
 	
 	//UPDATE Reader

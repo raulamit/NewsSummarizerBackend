@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,8 @@ import com.example.demo.models.Editor;
 import com.example.demo.repositories.EditorRepository;
 
 @RestController
-@CrossOrigin (origins = "*", maxAge = 3600)
+@CrossOrigin (origins = "http://localhost:4200", maxAge = 3600, allowCredentials= "true")
+//@CrossOrigin (origins = "https://newssummarizer-webdev2018-ng.herokuapp.com", maxAge = 3600, allowCredentials="true")
 public class EditorService {
 		
 	@Autowired
@@ -27,6 +29,12 @@ public class EditorService {
 	public Editor createEditor(
 			@RequestBody Editor editor) {
 		return editorRepository.save(editor);
+	}
+	
+	//Find All Editors
+	@GetMapping("/api/editors")
+	public List<Editor> findAllEditors() {
+		return (List<Editor>) editorRepository.findAll();
 	}
 	
 	//FIND Editor BY Editor ID
