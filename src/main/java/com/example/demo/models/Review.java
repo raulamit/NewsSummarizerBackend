@@ -17,8 +17,7 @@ public class Review {
 	private int id;
 	private String stars;
     private String reviewText;
-    private int likes;
-    
+
     @ManyToOne
     @JsonIgnore
     private Reader reader;
@@ -66,17 +65,5 @@ public class Review {
 	public void setSummary(Summary summary) {
 		this.summary = summary;
 	}
-
-	public int getLikes() {
-		return likes;
-	}
-
-	public void setLikes(int likes) {
-		this.likes = likes;
-	}
-	
-	
-    
-
 }
 
