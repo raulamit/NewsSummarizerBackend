@@ -21,9 +21,10 @@ import com.example.demo.repositories.AdvertisementRepository;
 import com.example.demo.repositories.NewsSummaryRepository;
 import com.example.demo.repositories.SummaryRepository;
 
+import static com.example.demo.constants.Constants.FRONT_END_SERVER;
+
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
-@CrossOrigin (origins = "https://newssummarizer-webdev2018-ng.herokuapp.com/", maxAge = 3600, allowCredentials="true")
+@CrossOrigin (origins = FRONT_END_SERVER, maxAge = 3600, allowCredentials="true")
 public class SummaryService {
 
     @Autowired
