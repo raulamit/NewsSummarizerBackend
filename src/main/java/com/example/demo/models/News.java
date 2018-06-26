@@ -1,5 +1,7 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class News {
     private Date webPublicationDate;
 
     @ManyToOne
+    @JsonIgnore
     private Editor editor;
 
     @OneToMany(mappedBy = "news")
